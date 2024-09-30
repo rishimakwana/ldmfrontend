@@ -1,0 +1,1 @@
+export const underConstructionMsg = () => alert(`😭😭😭😭😭 Developer did'nt work on me.`)

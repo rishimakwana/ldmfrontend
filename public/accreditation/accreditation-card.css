@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  display: flex;
+}
+
+body {
+  margin: auto;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-flow: column;
+}
+
+img {
+  max-width: 100%;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#front,
+#back {
+  overflow: hidden;
+  word-break: break-word;
+  background-color: white;
+}
+
+#front,
+#back {
+  outline: 1px solid #f0f0f0;
+  margin: 16px;
+}
+
+#back {
+  margin-top: 0;
+}
+
+@media print {
+
+  #front,
+  #back {
+    outline: unset;
+    margin: 0;
+  }
+}

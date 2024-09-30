@@ -1,0 +1,208 @@
+:root {
+  --section-spacing: 75px;
+  --line-height: 1.23;
+  --header-bottom-margin: 24px;
+  scroll-behavior: smooth;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+}
+
+body {
+  line-height: var(--line-height);
+}
+
+body * {
+  scrollbar-width: thin;
+}
+
+#__next {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+img {
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+input[type="file" i]::-webkit-file-upload-button {
+  font-family: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+
+
+/* Icon
+======================== */
+.icon {
+  font-size: 20px;
+}
+
+.icon-xs {
+  font-size: 14px
+}
+
+.icon-sm {
+  font-size: 18px
+}
+
+.icon-md {
+  font-size: 20px
+}
+
+.icon-lg {
+  font-size: 22px
+}
+
+.icon-xl {
+  font-size: 24px
+}
+
+
+/* Utility Classes
+======================== */
+
+/* Line Overflow */
+.line-1,
+.line-2,
+.line-3,
+.line-4,
+.line-5 {
+  --line: 1;
+  min-height: calc(var(--line-height) * var(--line) * 1em);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--line);
+  -webkit-box-orient: vertical;
+}
+
+.line-2 {
+  --line: 2
+}
+
+.line-3 {
+  --line: 3
+}
+
+.line-4 {
+  --line: 4
+}
+
+.line-5 {
+  --line: 5
+}
+
+
+/* Section Spacing */
+.section-spacing-mt {
+  margin-top: var(--section-spacing);
+}
+
+.section-spacing-mb {
+  margin-bottom: var(--section-spacing);
+}
+
+.section-spacing-my {
+  margin-top: var(--section-spacing);
+  margin-bottom: var(--section-spacing);
+}
+
+.section-spacing-pt {
+  padding-top: var(--section-spacing);
+}
+
+.section-spacing-pb {
+  padding-bottom: var(--section-spacing);
+}
+
+.section-spacing-py {
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+}
+
+
+
+/* Animation
+======================== */
+.fadeIn {
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.link-animation {
+  --direction: right;
+  --color: #444;
+  background-image: linear-gradient(to var(--direction), var(--color) 0%, var(--color) 100%);
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  background-position: 0 95%;
+  display: inline !important;
+  outline: none;
+  transition: background-size 0.25s ease-in-out;
+}
+
+.link-animation:hover,
+.link-animation:focus,
+a:hover .link-animation {
+  background-size: 100% 1px;
+}
+
+
+/* Editor */
+.text-editor-content p {
+  margin: 0;
+  line-height: 1.5;
+}
