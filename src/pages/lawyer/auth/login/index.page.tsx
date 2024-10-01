@@ -11,6 +11,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { yupResolver } from "@hookform/resolvers/yup";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import InputField from "@/components/_ui/inputField/InputField.component";
 import { style } from "./Login.style";
@@ -22,6 +23,7 @@ import { setUser } from "@/pages/auth/Auth.util";
 const Login: Page = () => {
   const [login] = useLoginMutation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [capVal, setCapVal] = useState<string>("");
 
   const {
     control,
@@ -32,8 +34,9 @@ const Login: Page = () => {
   });
 
   const onSubmit = async (formData: TSchema) => {
-    const profile = await login({ ...formData }).unwrap();
-    setUser(profile);
+    // const profile = await login({ ...formData }).unwrap();
+    // setUser(profile);
+    console.log(formData);
   };
 
   return (
@@ -53,7 +56,10 @@ const Login: Page = () => {
           sx={style.box}
         >
           <Typography variant="h1" textAlign="center">
-            Login to LDMS.
+            Login
+          </Typography>
+          <Typography variant="body1" textAlign="center">
+            Welcome to Safedox!
           </Typography>
 
           <Stack gap={2}>
@@ -71,21 +77,29 @@ const Login: Page = () => {
                 ),
               }}
             />
-            <MuiLink textAlign="right">Forgot Password?</MuiLink>
+            <MuiLink textAlign="right" href="/lawyer/auth/forget-password">
+              Forgot Password?
+            </MuiLink>
           </Stack>
+
+          <ReCAPTCHA
+            sitekey="6LdJSFMqAAAAABN5zQnscHh7AFu1u08cLstoRiWT"
+            onChange={(val: any) => setCapVal(val as any)}
+          />
 
           <LoadingButton
             variant="contained"
             size="large"
             type="submit"
             loading={isSubmitting}
+            disabled={!capVal}
           >
             Login
           </LoadingButton>
 
           <Typography textAlign="center">
             Don't have an account? &nbsp;{" "}
-            <MuiLink component={Link} href="/auth/register">
+            <MuiLink component={Link} href="/lawyer/auth/register">
               Register
             </MuiLink>
           </Typography>

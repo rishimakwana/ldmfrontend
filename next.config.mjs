@@ -14,7 +14,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'emsobject.oss-me-east-1.aliyuncs.com' }
     ]
   },
-  transpilePackages: ['@mui/x-charts'],
+  transpilePackages: ['@mui/x-charts', 'mui-one-time-password-input'],
   async redirects() {
     return [{ source: '/home', destination: '/', permanent: false }]
   },

@@ -13,13 +13,12 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import InputField from "@/components/_ui/inputField/InputField.component";
-import { style } from "./Login.style";
 import { Page } from "@/types";
-import { schema, TSchema } from "./Login.config";
 import { useLoginMutation } from "@/redux/api/auth.api";
-import { setUser } from "../Auth.util";
+import { style } from "./ForgetPassword.style";
+import { schema, TSchema } from "@/pages/form-elements/FormElements.config";
 
-const Login: Page = () => {
+const ForgetPassword: Page = () => {
   const [login] = useLoginMutation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -28,12 +27,12 @@ const Login: Page = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<TSchema>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema as any),
   });
 
   const onSubmit = async (formData: TSchema) => {
-    const profile = await login({ ...formData }).unwrap();
-    setUser(profile);
+    // Handle the password reset logic here
+    console.log(formData);
   };
 
   return (
@@ -53,14 +52,13 @@ const Login: Page = () => {
           sx={style.box}
         >
           <Typography variant="h1" textAlign="center">
-            Login to SafeDox.
+            Forget Password
           </Typography>
 
           <Stack gap={2}>
-            <InputField name="email" label="Email" control={control} />
             <InputField
               name="password"
-              label="Password"
+              label="New Password"
               type={showPassword ? "text" : "password"}
               control={control}
               InputProps={{
@@ -71,7 +69,22 @@ const Login: Page = () => {
                 ),
               }}
             />
-            <MuiLink textAlign="right">Forgot Password?</MuiLink>
+          </Stack>
+
+          <Stack gap={2}>
+            <InputField
+              name="confirmPassword"
+              label="Confirm Password"
+              type={showPassword ? "text" : "password"}
+              control={control}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={() => setShowPassword((v) => !v)}>
+                    {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+                  </IconButton>
+                ),
+              }}
+            />
           </Stack>
 
           <LoadingButton
@@ -80,24 +93,17 @@ const Login: Page = () => {
             type="submit"
             loading={isSubmitting}
           >
-            Login
+            Reset Password
           </LoadingButton>
-
-          <Typography textAlign="center">
-            Don't have an account? &nbsp;{" "}
-            <MuiLink component={Link} href="/auth/register">
-              Register
-            </MuiLink>
-          </Typography>
         </Stack>
       </Container>
     </>
   );
 };
 
-Login.rootLayoutProps = {
+ForgetPassword.rootLayoutProps = {
   pageType: "auth",
-  title: "Login",
+  title: "ForgetPassword",
 };
 
-export default Login;
+export default ForgetPassword;
