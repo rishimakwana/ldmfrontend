@@ -95,7 +95,7 @@ export default function Header() {
               </Button>
               <Button
                 variant="contained"
-                href="/auth/register"
+                href="lawyer/auth/register"
                 LinkComponent={Link}
                 sx={style.button}
               >

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { style } from "./OtpVerify.style";
-import { MuiOtpInput } from "mui-one-time-password-input";
+// import { MuiOtpInput } from "mui-one-time-password-input";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { LuArrowLeftCircle } from "react-icons/lu";
 import OTP from "@/components/_ui/otpField/otpField.component";
