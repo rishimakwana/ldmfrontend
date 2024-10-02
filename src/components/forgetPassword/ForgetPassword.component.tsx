@@ -1,109 +1,80 @@
-import Link from "next/link";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import {
-  Link as MuiLink,
-  IconButton,
-  Stack,
-  Typography,
-  Container,
-} from "@mui/material";
+import { Stack, IconButton, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import InputField from "@/components/_ui/inputField/InputField.component";
-import { Page } from "@/types";
-import { useLoginMutation } from "@/redux/api/auth.api";
+import { TSchema } from "@/pages/form-elements/FormElements.config";
+import { CheckPasswordStrength } from "../passwordStrength/PasswordStrength.component";
 import { style } from "./ForgetPassword.style";
-import { schema, TSchema } from "@/pages/form-elements/FormElements.config";
 
-const ForgetPassword: Page = () => {
-  const [login] = useLoginMutation();
+interface PasswordResetFormProps {
+  schema: any;
+  onSubmit: (data: TSchema) => void;
+  control: any;
+  watch: any;
+
+  isSubmitting: boolean;
+  title: string;
+}
+
+const PasswordResetForm = ({
+  schema,
+  onSubmit,
+  control,
+  watch,
+  isSubmitting,
+  title,
+}: PasswordResetFormProps) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  const {
-    control,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<TSchema>({
-    resolver: yupResolver(schema as any),
-  });
-
-  const onSubmit = async (formData: TSchema) => {
-    // Handle the password reset logic here
-    console.log(formData);
-  };
+  const passwordValue = watch("password", "");
 
   return (
     <>
-      <style global jsx>{`
-        main {
-          display: flex;
-          justify-content: center;
-        }
-      `}</style>
+      <Stack gap={2}>
+        <InputField
+          name="password"
+          label="New Password"
+          type={showPassword ? "text" : "password"}
+          control={control}
+          InputProps={{
+            endAdornment: (
+              <IconButton onClick={() => setShowPassword((v) => !v)}>
+                {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+              </IconButton>
+            ),
+          }}
+        />
+      </Stack>
 
-      <Container className="section-spacing-my">
-        <Stack
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-          sx={style.box}
-        >
-          <Typography variant="h1" textAlign="center">
-            Forget Password
-          </Typography>
+      <CheckPasswordStrength password={passwordValue} />
 
-          <Stack gap={2}>
-            <InputField
-              name="password"
-              label="New Password"
-              type={showPassword ? "text" : "password"}
-              control={control}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={() => setShowPassword((v) => !v)}>
-                    {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                  </IconButton>
-                ),
-              }}
-            />
-          </Stack>
+      <Stack gap={2}>
+        <InputField
+          name="confirmPassword"
+          label="Confirm Password"
+          type={showPassword ? "text" : "password"}
+          control={control}
+          InputProps={{
+            endAdornment: (
+              <IconButton onClick={() => setShowPassword((v) => !v)}>
+                {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
+              </IconButton>
+            ),
+          }}
+        />
+      </Stack>
 
-          <Stack gap={2}>
-            <InputField
-              name="confirmPassword"
-              label="Confirm Password"
-              type={showPassword ? "text" : "password"}
-              control={control}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={() => setShowPassword((v) => !v)}>
-                    {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                  </IconButton>
-                ),
-              }}
-            />
-          </Stack>
-
-          <LoadingButton
-            variant="contained"
-            size="large"
-            type="submit"
-            loading={isSubmitting}
-          >
-            Reset Password
-          </LoadingButton>
-        </Stack>
-      </Container>
+      <LoadingButton
+        variant="contained"
+        size="large"
+        type="submit"
+        loading={isSubmitting}
+      >
+        {title}
+      </LoadingButton>
     </>
   );
 };
 
-ForgetPassword.rootLayoutProps = {
-  pageType: "auth",
-  title: "ForgetPassword",
-};
-
-export default ForgetPassword;
+export default PasswordResetForm;

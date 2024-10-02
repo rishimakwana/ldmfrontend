@@ -5,7 +5,7 @@ import {
   Typography,
   Link as MuiLink,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { style } from "./OtpVerify.style";
 // import { MuiOtpInput } from "mui-one-time-password-input";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -14,17 +14,31 @@ import OTP from "@/components/_ui/otpField/otpField.component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { schema, TSchema } from "./OtpVerify.config";
+import { useRouter } from "next/navigation";
 
 const OtpVerify = () => {
-  const { handleSubmit } = useForm<TSchema>({
+  const {
+    handleSubmit,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm<any>({
     resolver: yupResolver(schema),
   });
   const [otp, setOtp] = useState("");
 
-  const onSubmit = (formData: any) => {
-    console.log("Submitted OTP:", otp);
-    console.log("Form Data:", formData);
+  const router = useRouter();
+
+  const onSubmit = async (formData: TSchema) => {
+    try {
+      console.log("Form data:", formData);
+      router.push("/client/auth/address");
+    } catch (error) {
+      console.log(error);
+    }
   };
+  // useEffect(() => {
+  //   setValue("otp", otp);
+  // }, [otp, setValue]);
 
   return (
     <>
@@ -69,10 +83,15 @@ const OtpVerify = () => {
             sx={style.otpinput}
           /> */}
           <Stack sx={style.input}>
-            <OTP value={otp} onChange={setOtp} length={6} />
+            <OTP value={otp} onChange={setOtp} setValue={setValue} length={6} />
           </Stack>
-          <LoadingButton variant="contained" size="large" type="submit">
-            Verify
+          <LoadingButton
+            variant="contained"
+            size="large"
+            type="submit"
+            loading={isSubmitting}
+          >
+            Submit
           </LoadingButton>
           <Typography textAlign="center">
             Didn’t receive the OTP? &nbsp;{" "}

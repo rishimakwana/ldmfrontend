@@ -7,10 +7,12 @@ export default function OTP({
   length,
   value,
   onChange,
+  setValue,
 }: {
   length: number;
   value: string;
   onChange: React.Dispatch<React.SetStateAction<string>>;
+  setValue: any;
 }) {
   const inputRefs = React.useRef<HTMLInputElement[]>(
     new Array(length).fill(null)
@@ -55,6 +57,7 @@ export default function OTP({
         onChange((prevOtp) => {
           const otp =
             prevOtp.slice(0, currentIndex) + prevOtp.slice(currentIndex + 1);
+          setValue("otp", otp);
           return otp;
         });
 
@@ -70,6 +73,7 @@ export default function OTP({
           const otp =
             prevOtp.slice(0, currentIndex) + prevOtp.slice(currentIndex + 1);
           console.log("otp", otp);
+          setValue("otp", otp);
           return otp;
         });
         break;
@@ -102,6 +106,7 @@ export default function OTP({
       otpArray[indexToEnter] = lastValue;
       const updatedOtp = otpArray.join("");
       console.log("Updated OTP:", updatedOtp); // Log updated OTP here
+      setValue("otp", updatedOtp);
       return updatedOtp;
     });
     if (currentValue !== "") {

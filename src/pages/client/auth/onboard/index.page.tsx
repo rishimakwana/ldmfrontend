@@ -10,12 +10,14 @@ import { Page } from "@/types";
 import { useLoginMutation } from "@/redux/api/auth.api";
 import { style } from "./Onboard.style";
 import { schema, TSchema } from "./Onboard.config";
+import { useRouter } from "next/navigation";
 
 const Onboard: Page = () => {
   const [login] = useLoginMutation();
   const name = "John Doe";
   const client_email = "joan@gmail.com";
-  const phone_number = "7894561231";
+  const phone_number = "8959598493";
+  const router = useRouter();
 
   const {
     control,
@@ -31,6 +33,7 @@ const Onboard: Page = () => {
 
   const onSubmit = async (formData: TSchema) => {
     console.log(formData);
+    router.push("/client/auth/otp-verify");
   };
 
   return (

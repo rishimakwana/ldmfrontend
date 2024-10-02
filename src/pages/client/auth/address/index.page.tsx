@@ -21,15 +21,13 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import InputField from "@/components/_ui/inputField/InputField.component";
-import PhoneField from "@/components/_ui/phoneField/PhoneField.component";
-import RenderContent from "@/components/renderContent/RenderContent.component";
+
 import { Page } from "@/types";
-import { useRegisterMutation } from "@/redux/api/auth.api";
-import { useGetCountriesQuery } from "@/redux/api/common.api";
-import { useGetOrganizationTypeListQuery } from "@/redux/api/organization.api";
-import { setUser } from "@/pages/auth/Auth.util";
+
 import { style } from "./Address.style";
 import { TSchema, schema } from "./Address.config";
+import { LuArrowLeftCircle } from "react-icons/lu";
+import { useRouter } from "next/navigation";
 
 const Address: Page = () => {
   const {
@@ -40,11 +38,12 @@ const Address: Page = () => {
   } = useForm<TSchema>({
     resolver: yupResolver(schema),
   });
-
+  const { push } = useRouter();
   const onSubmit = async (formData: any) => {
     // const profile = await login({ ...formData }).unwrap();
     // setUser(profile);
     console.log(formData);
+    push("/client/auth/add-password");
   };
 
   return (
@@ -63,11 +62,17 @@ const Address: Page = () => {
           noValidate
           sx={style.box}
         >
+          <IconButton
+            sx={style.icon}
+            onClick={() => push("/client/auth/otp-verify")}
+          >
+            <LuArrowLeftCircle />
+          </IconButton>
           <Typography variant="h1" textAlign="center">
             Add Your Address
           </Typography>
 
-          <Grid container spacing={4}>
+          <Grid container spacing={3}>
             {/* State */}
             <Grid item xs={12} sm={12}>
               <InputField
@@ -79,25 +84,7 @@ const Address: Page = () => {
 
             {/* Country */}
             <Grid item sm={12}>
-              <Controller
-                name="city"
-                control={control}
-                defaultValue=""
-                render={({
-                  fieldState: { error },
-                  field: { ref, ...restField },
-                }) => (
-                  <FormControl error={!!error}>
-                    <InputLabel>Select</InputLabel>
-                    <Select {...restField} inputRef={ref} label="Select">
-                      <MenuItem value="pune">Pune</MenuItem>
-                      <MenuItem value="indore">Indore</MenuItem>
-                      <MenuItem value="bihar">Bihar</MenuItem>
-                    </Select>
-                    <FormHelperText>{error?.message}</FormHelperText>
-                  </FormControl>
-                )}
-              />
+              <InputField name="city" label="City *" control={control} />
             </Grid>
 
             {/* Zipcode */}
@@ -116,7 +103,7 @@ const Address: Page = () => {
                   field: { ref, ...restField },
                 }) => (
                   <FormControl error={!!error}>
-                    <InputLabel>State</InputLabel>
+                    <InputLabel>State *</InputLabel>
                     <Select {...restField} inputRef={ref} label="Select">
                       <MenuItem value="maharashtra">Maharashtra</MenuItem>
                       <MenuItem value="madhaya pradesh">

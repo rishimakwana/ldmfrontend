@@ -1,10 +1,10 @@
 import PasswordResetForm from "@/components/forgetPassword/ForgetPassword.component"; // Ensure this path is correct
 import React from "react";
-import { schema, TSchema } from "./ForgetPassword.config";
+import { schema, TSchema } from "./AddPassword.config";
 import { Container, Stack, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { style } from "./ForgetPassword.style";
+import { style } from "./AddPassword.style";
 
 const ForgetPass = () => {
   const { control, handleSubmit, formState, watch } = useForm<TSchema>({
@@ -33,7 +33,7 @@ const ForgetPass = () => {
           sx={style.box}
         >
           <Typography variant="h1" textAlign="center">
-            Reset Password
+            Setup Password
           </Typography>
           <PasswordResetForm
             schema={schema}
@@ -41,6 +41,7 @@ const ForgetPass = () => {
             control={control}
             watch={watch}
             isSubmitting={formState.isSubmitting}
+            title={"Next"}
           />
         </Stack>
       </Container>
