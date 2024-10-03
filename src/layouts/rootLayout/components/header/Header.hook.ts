@@ -16,7 +16,7 @@ export const useOptions = () => {
 
   const PROFILE_OPTIONS_1: MenuOption[] = [
     // { id: 6, label: 'Dashboard', link: '/customer/dashboard', Icon: MdOutlineDashboard, roles: ['customer'] },
-    { id: 6, label: 'Dashboard', link: '/dashboard/home', Icon: MdOutlineDashboard, exludedRoles: ['customer'] },
+    { id: 6, label: 'Dashboard', link: '/lawyer/dashboard/home', Icon: MdOutlineDashboard, exludedRoles: ['customer'] },
     { id: 12, label: 'My bookings', link: '/customer/my-bookings', Icon: MdOutlineEventAvailable, roles: ['customer'], },
     { id: 19, label: 'My wallet', link: '/customer/my-wallet', Icon: MdOutlineAccountBalanceWallet, roles: ['customer'] },
     { id: 15, label: 'My profile', link: '/customer/my-profile', Icon: MdOutlinePersonOutline, roles: ['customer'] },

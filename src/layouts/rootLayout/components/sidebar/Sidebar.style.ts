@@ -29,6 +29,8 @@ export const style: Style = {
     flex: 1,
     overflow: 'hidden',
     px: 1,
+    
+
   },
   profileBox: {
     px: 2,
