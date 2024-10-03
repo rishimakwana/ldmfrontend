@@ -1,23 +1,21 @@
+import { AuthApiResponse, RegisterPayload } from '@/pages/lawyer/auth/Auth.type'
 import { api } from './api.config'
-import { AuthApiResponse } from '@/pages/auth/Auth.type'
-
-
 
 export const extendedApi = api.injectEndpoints({
   endpoints: (builder) => ({
 
-    login: builder.mutation<AuthApiResponse, { email: string, password: string }>({
+    lawyerLogin: builder.mutation<AuthApiResponse, { email: string, password: string }>({
       query: (body) => ({
-        url: '/v1/Auth/login',
+        url: '/lawyer/auth/login',
         method: 'POST',
         body,
         headers: { hideToast: 'true' },
       }),
     }),
 
-    register: builder.mutation<AuthApiResponse, { firstName: string, lastName: string, phone: string, email: string, countryId: number, password: string, customerOrganizationTypeId: number, customerOrganizationName: string }>({
+    lawyerRegister: builder.mutation<AuthApiResponse, RegisterPayload>({
       query: (body) => ({
-        url: '/v1/Auth/register',
+        url: '/lawyer/auth/register',
         method: 'POST',
         body,
         headers: { hideToast: 'true' },
@@ -29,6 +27,6 @@ export const extendedApi = api.injectEndpoints({
 
 
 export const {
-  useLoginMutation,
-  useRegisterMutation,
+  useLawyerLoginMutation,
+  useLawyerRegisterMutation,
 } = extendedApi

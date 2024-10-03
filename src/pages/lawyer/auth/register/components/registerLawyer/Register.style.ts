@@ -20,5 +20,9 @@ export const style: Style = {
   handleButton: {
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }

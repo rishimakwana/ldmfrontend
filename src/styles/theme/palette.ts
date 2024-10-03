@@ -1,16 +1,13 @@
-import { OrganizationDTO } from '@/dto'
 import { Theme } from '@mui/material'
 
-
-
-export const createPalette = (orgTheme?: OrganizationDTO['theme']) => {
+export const createPalette = () => {
 
   return {
     mode: 'light',
     divider: '#f0f0f0',
     dividerDark: '#dcdfe4',
     primary: {
-      main: orgTheme ? orgTheme.color.primary : '#6366f1',
+      main: '#6CC24A',
     },
     background: {
       bg1: '#fafafa',

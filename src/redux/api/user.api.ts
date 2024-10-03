@@ -29,11 +29,6 @@ export const extendedApi = api.injectEndpoints({
       invalidatesTags: (result, error) => !error ? ['profile'] : [],
     }),
 
-    updateFcmToken: builder.mutation<void, { fcmToken: string, userId: number }>({
-      query: (body) => ({ url: '/v1/User/fcmToken/update', method: 'PUT', body, headers: { hideToast: 'true' }, }),
-      invalidatesTags: (result, error) => !error ? ['profile'] : [],
-    }),
-
     changePassword: builder.mutation<void, { userId: number, oldPassword: string, password: string, confirmPassword: string }>({
       query: (body) => ({
         url: '/v1/Auth/changePassword',
@@ -49,6 +44,5 @@ export const extendedApi = api.injectEndpoints({
 export const {
   useLazyProfileQuery,
   useUpdateProfileMutation,
-  useChangePasswordMutation,
-  useUpdateFcmTokenMutation,
+  useChangePasswordMutation
 } = extendedApi

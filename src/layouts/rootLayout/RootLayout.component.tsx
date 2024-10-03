@@ -9,7 +9,7 @@ import ErrorBoundary from '@/components/errorBoundary/ErrorBoundary.component'
 import FullPageMessage from '@/components/fullPageMessage/FullPageMessage.component'
 import { RootLayoutProps } from './RootLayout.type'
 import { SIDEBAR_WIDTH } from './RootLayout.config'
-import { usePage, useNProgress, useSetOrganization, useFcmToken } from '@/hooks'
+import { usePage, useNProgress, } from '@/hooks'
 import { getCookie } from '@/utils'
 import { useAuth } from './RootLayout.hook'
 
@@ -22,8 +22,6 @@ export default function RootLayout(props: RootLayoutProps & { children: React.Re
   const ngProgress = useNProgress()
   const token = getCookie('token')
   const contentWidth = sidebar ? `calc(100vw - ${SIDEBAR_WIDTH}px)` : undefined
-  useSetOrganization()
-  useFcmToken()
 
 
   if (!isAdminDashboard) sidebar = false
@@ -40,7 +38,7 @@ export default function RootLayout(props: RootLayoutProps & { children: React.Re
 
   return <>
     <Head>
-      {title && <title>{`${title} | EMS`}</title>}
+      {title && <title>{`${title} | LDMS`}</title>}
     </Head>
 
     {

@@ -11,11 +11,9 @@ import { usePage, useReduxSelector } from '@/hooks'
 export const useMakeTheme = (): Theme => {
   const { isAdminDashboard } = usePage()
   const organization = useReduxSelector(state => state.organization)
-  const orgTheme = isAdminDashboard ? undefined : organization?.theme || undefined
-
 
   let theme = createTheme({
-    palette: createPalette(orgTheme),
+    palette: createPalette(),
     typography: createTypography(),
     shape: {
       borderRadius: 8

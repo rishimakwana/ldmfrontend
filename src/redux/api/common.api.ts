@@ -1,9 +1,4 @@
-import { CurrencyDTO } from '@/dto'
 import { api } from './api.config'
-import { AccessibilityDTO } from '@/dto/Accessibility.dto'
-import { Request as GeneratePdfRequest } from '@/pages/api/generate-pdf.api'
-
-
 
 export const extendedApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -26,42 +21,10 @@ export const extendedApi = api.injectEndpoints({
       },
     }),
 
-    getTimeZones: builder.query<{ id: number, text: string }[], void>({
-      query: () => '/v1/Master/TimeZones',
-    }),
-
-    getAccessiblities: builder.query<AccessibilityDTO[], void>({
-      query: () => '/v1/Master/accessiblities',
-    }),
-
-    getCountries: builder.query<{ id: number, name: string, code: string }[], void>({
-      query: () => '/v1/Master/countries',
-    }),
-
-    getCurrenciesList: builder.query<CurrencyDTO[], void>({
-      query: () => `/v1/Master/currencies`,
-      providesTags: ['currency']
-    }),
-
-    generatePdf: builder.mutation<Blob, GeneratePdfRequest['body']>({
-      query: (body) => ({
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/generate-pdf`,
-        body,
-        method: 'POST',
-        headers: { hideToast: 'true' },
-        responseHandler: (response) => response.blob(),
-      }),
-    }),
-
   })
 })
 
 
 export const {
-  useUploadFileMutation,
-  useGetTimeZonesQuery,
-  useGetAccessiblitiesQuery,
-  useGetCountriesQuery,
-  useGetCurrenciesListQuery,
-  useGeneratePdfMutation,
+  useUploadFileMutation
 } = extendedApi
