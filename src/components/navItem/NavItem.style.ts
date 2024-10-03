@@ -9,7 +9,7 @@ export const makeStyle = (size: NavItemProps['size'], isChildren: boolean | unde
     root: {
       ...(size === 'large' && {
         borderRadius: 1,
-        p: 1.1,
+        p: 2,
         pl: isChildren ? 4 : 1,
       }),
       '&.active': {

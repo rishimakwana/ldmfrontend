@@ -18,7 +18,7 @@ import { style } from "./Login.style";
 import { Page } from "@/types";
 import { schema, TSchema } from "./Login.config";
 import { useLoginMutation } from "@/redux/api/auth.api";
-import { setUser } from "@/pages/auth/Auth.util";
+import { setUser } from "../Auth.util";
 
 const Login: Page = () => {
   const [login] = useLoginMutation();
