@@ -12,7 +12,6 @@ import InputField from '@/components/_ui/inputField/InputField.component';
 import { US_STATES } from '@/data/UsStates';
 import OtpInputField from '@/components/otpInput/OtpVerify.coimponent';
 import { CheckPasswordStrength } from '@/components/passwordStrength/PasswordStrength.component';
-import { useRouter } from 'next/router';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import RegisterStepper from '../customStepper/CustomStepper.component';
 import Image from 'next/image';
@@ -24,7 +23,6 @@ import ImageField from '@/components/_ui/imageField/ImageField.component';
 const steps = ['Personal Details', 'Business Details'];
 
 const RegisterComponent = () => {
-  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -49,7 +47,6 @@ const RegisterComponent = () => {
 
   const onSubmit = async (formData: TSchema) => {
     try {
-      console.log('Form data:', formData);
       const { termsAccepted, otp, confirmPassword, ...formDataToSend } = formData;
       const profile = await register(formDataToSend).unwrap();
       setUser(profile);

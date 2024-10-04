@@ -12,4 +12,8 @@ const ClientList = () => {
   );
 };
 
+ClientList.rootLayoutProps = {
+  pageType: "protected",
+  title: "Client List",
+};
 export default ClientList;

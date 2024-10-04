@@ -15,10 +15,7 @@ export default function Sidebar() {
   const profile = useReduxSelector((state) => state.layout.profile);
   const dispatch = useReduxDispatch();
   const sidebarOptions = useSidebarOptions();
-  const name =
-    profile.role === "admin"
-      ? profile.organizationName
-      : `${profile.firstName} ${profile.lastName}`;
+  const name = profile?.fullName;
 
   useEffect(() => {
     const navElement = navRef.current!;

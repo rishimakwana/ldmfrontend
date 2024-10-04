@@ -142,4 +142,9 @@ const OnboardClient = () => {
   );
 };
 
+
+OnboardClient.rootLayoutProps = {
+  pageType: "protected",
+  title: "On-Board Client",
+};
 export default OnboardClient;

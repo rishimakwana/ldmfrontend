@@ -7,13 +7,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import InputField from "@/components/_ui/inputField/InputField.component";
 import { Page } from "@/types";
-import { useLoginMutation } from "@/redux/api/auth.api";
+import { useLawyerLoginMutation } from "@/redux/api/auth.api";
 import { style } from "./Onboard.style";
 import { schema, TSchema } from "./Onboard.config";
 import { useRouter } from "next/navigation";
 
 const Onboard: Page = () => {
-  const [login] = useLoginMutation();
+  const [login] = useLawyerLoginMutation();
   const name = "John Doe";
   const client_email = "joan@gmail.com";
   const phone_number = "8959598493";

@@ -10,9 +10,6 @@ import { useReduxSelector } from '@/hooks'
 
 
 export default function Footer() {
-  const organization = useReduxSelector(state => state.organization)
-
-
   const createNavItems = (items: TNavItem[], heading: string) => {
     return (
       <Stack gap={2} sx={style.navBox}>
@@ -25,7 +22,6 @@ export default function Footer() {
       </Stack>
     )
   }
-
 
   return (
     <Stack component='footer' sx={style.root}>
@@ -68,7 +64,7 @@ export default function Footer() {
         </Grid>
 
         {/* Copyright */}
-        <Typography sx={style.copyright}>&copy;{new Date().getFullYear()} {organization.organizationName}. All right reserved</Typography>
+        <Typography sx={style.copyright}>&copy;{new Date().getFullYear()} LDMS. All right reserved</Typography>
 
       </Stack>
     </Stack>

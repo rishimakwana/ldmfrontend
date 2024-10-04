@@ -11,5 +11,8 @@ const UplaodDocuments = () => {
     </>
   );
 };
-
+UplaodDocuments.rootLayoutProps = {
+  pageType: "protected",
+  title: "Upload Documents",
+};
 export default UplaodDocuments;

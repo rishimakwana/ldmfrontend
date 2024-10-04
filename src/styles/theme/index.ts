@@ -10,7 +10,6 @@ import { usePage, useReduxSelector } from '@/hooks'
 
 export const useMakeTheme = (): Theme => {
   const { isAdminDashboard } = usePage()
-  const organization = useReduxSelector(state => state.organization)
 
   let theme = createTheme({
     palette: createPalette(),

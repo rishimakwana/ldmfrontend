@@ -6,7 +6,6 @@ import { useReduxSelector } from '@/hooks'
 
 
 export const useOptions = () => {
-  const plan = useReduxSelector(state => state.subscription.plan)
 
   const MENU_OPTIONS = [
     { label: 'FAQ', link: '#!' },
@@ -26,7 +25,6 @@ export const useOptions = () => {
 
   const PROFILE_OPTIONS_2: MenuOption[] = [
     { id: 11, label: 'Settings', link: '/dashboard/settings', Icon: MdOutlineSettings, exludedRoles: ['customer'] },
-    ...(plan?.isTicketingSystemEnabled ? [{ id: 18, label: 'Support', link: '/customer/tickets', Icon: MdSupportAgent, roles: ['customer' as const] }] : []),
     { id: 14, label: 'Password', link: '/customer/change-password', Icon: MdKey, roles: ['customer'] },
     { label: 'Logout', link: '#', Icon: MdOutlineLogout }
   ]

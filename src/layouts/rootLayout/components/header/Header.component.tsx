@@ -31,10 +31,7 @@ export default function Header() {
   );
   const { MENU_OPTIONS, PROFILE_OPTIONS_1, PROFILE_OPTIONS_2 } = useOptions();
   const dispatch = useReduxDispatch();
-  const name =
-    profile.role === "admin"
-      ? profile.organizationName
-      : `${profile.firstName} ${profile.lastName}`;
+  const name = profile?.fullName;
 
   const handleCloseProfileMenu = () => {
     setProfileAnchorEl(null);

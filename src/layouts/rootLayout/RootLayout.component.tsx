@@ -6,7 +6,6 @@ import Footer from "./components/footer/Footer.component";
 import Sidebar from "./components/sidebar/Sidebar.component";
 import WebsiteLoader from "@/components/websiteLoader/WebsiteLoader.component";
 import ErrorBoundary from "@/components/errorBoundary/ErrorBoundary.component";
-import FullPageMessage from "@/components/fullPageMessage/FullPageMessage.component";
 import { RootLayoutProps } from "./RootLayout.type";
 import { SIDEBAR_WIDTH } from "./RootLayout.config";
 import {
@@ -20,21 +19,18 @@ export default function RootLayout(
   props: RootLayoutProps & { children: React.ReactNode }
 ) {
   let { children, title, header, sidebar, footer } = props;
-  const { isLoading, isError, isPermission } = useAuth(props);
+  const { isLoading, isError } = useAuth(props);
   const { isCustomerDashboard, isAdminDashboard } = usePage();
   const ngProgress = useNProgress();
   const token = getCookie("token");
   const contentWidth = sidebar ? `calc(100vw - ${SIDEBAR_WIDTH}px)` : undefined;
-  // useSetOrganization();
-  // useFcmToken();
+
 
   if (!isAdminDashboard) sidebar = false;
   if (isAdminDashboard) (footer = false), (header = false);
   if (isCustomerDashboard) footer = false;
 
   const renderChildren = () => {
-    if (!isPermission)
-      return <FullPageMessage heading="404: Page Not Found" hideButton />;
     if (!token && props.pageType === "protected") return null;
     return children;
   };
@@ -57,7 +53,6 @@ export default function RootLayout(
           </Stack>
         </>
       )}
-
       {ngProgress}
     </>
   );

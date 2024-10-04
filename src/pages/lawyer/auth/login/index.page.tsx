@@ -17,11 +17,11 @@ import InputField from "@/components/_ui/inputField/InputField.component";
 import { style } from "./Login.style";
 import { Page } from "@/types";
 import { schema, TSchema } from "./Login.config";
-import { useLoginMutation } from "@/redux/api/auth.api";
+import { useLawyerLoginMutation } from "@/redux/api/auth.api";
 import { setUser } from "../Auth.util";
 
 const Login: Page = () => {
-  const [login] = useLoginMutation();
+  const [login] = useLawyerLoginMutation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [capVal, setCapVal] = useState<string>("");
 
@@ -34,9 +34,8 @@ const Login: Page = () => {
   });
 
   const onSubmit = async (formData: TSchema) => {
-    // const profile = await login({ ...formData }).unwrap();
-    // setUser(profile);
-    console.log(formData);
+    const profile = await login({ ...formData }).unwrap();
+    setUser(profile);
   };
 
   return (
