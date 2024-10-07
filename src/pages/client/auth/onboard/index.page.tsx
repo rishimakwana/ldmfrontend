@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Stack, Typography, Container } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -11,13 +11,21 @@ import { useLawyerLoginMutation } from "@/redux/api/auth.api";
 import { style } from "./Onboard.style";
 import { schema, TSchema } from "./Onboard.config";
 import { useRouter } from "next/navigation";
+import {
+  useGetProfileMutation,
+  useLazyProfileQuery,
+} from "@/redux/api/user.api";
+import { useRouter as getParams } from "next/router";
 
 const Onboard: Page = () => {
   const [login] = useLawyerLoginMutation();
   const name = "John Doe";
-  const client_email = "joan@gmail.com";
-  const phone_number = "8959598493";
+
   const router = useRouter();
+  const params = getParams();
+  const [email, setEmail] = useState(""); // State for email
+  const [phone, setPhone] = useState(""); // State for phone
+  const [getProfile] = useGetProfileMutation(); // Mutation hook to get profile
 
   const {
     control,
@@ -28,13 +36,32 @@ const Onboard: Page = () => {
     resolver: yupResolver(schema),
   });
 
-  setValue("email", client_email);
-  setValue("phone", phone_number);
-
   const onSubmit = async (formData: TSchema) => {
     console.log(formData);
     router.push("/client/auth/otp-verify");
   };
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (params.query.token) {
+        console.log(params.query.token, "token");
+        try {
+          const profileData: any = await getProfile({
+            token: params.query.token.toString(),
+          }).unwrap();
+          setEmail(profileData.result.email);
+          setPhone(profileData.result.phone);
+          setValue("email", profileData.result.email);
+          setValue("phone", profileData.result.phone);
+          console.log("Profile data:", profileData.result);
+        } catch (error) {
+          console.error("Error fetching profile:", error);
+        }
+      }
+    };
+
+    fetchProfile();
+  }, [params.query.token, getProfile]);
 
   return (
     <>
@@ -63,7 +90,7 @@ const Onboard: Page = () => {
             <InputField
               name="email"
               label="Email Address"
-              value={client_email}
+              value={email}
               disabled
               control={control}
             />
@@ -79,7 +106,7 @@ const Onboard: Page = () => {
             <InputField
               name="phone"
               label="Mobile Number"
-              value={phone_number}
+              value={phone}
               disabled
               control={control}
             />

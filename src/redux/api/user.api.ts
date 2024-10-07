@@ -10,7 +10,7 @@ export const extendedApi = api.injectEndpoints({
   endpoints: (builder) => ({
 
     profile: builder.query<ProfileDTO & { modules: Record<string, Module> }, void>({
-      query: () => '/v1/User/profile',
+      query: () => '/auth/getProfile',
       providesTags: ['profile'],
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         await queryFulfilled
@@ -36,6 +36,19 @@ export const extendedApi = api.injectEndpoints({
         body,
       }),
     }),
+     
+    
+    getProfile: builder.mutation<ProfileDTO, { token: string }>({
+      query: ({ token }) => ({
+        url: '/auth/getProfile',
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
+    
+    
 
   })
 })
@@ -44,5 +57,6 @@ export const extendedApi = api.injectEndpoints({
 export const {
   useLazyProfileQuery,
   useUpdateProfileMutation,
-  useChangePasswordMutation
+  useChangePasswordMutation,
+  useGetProfileMutation,
 } = extendedApi

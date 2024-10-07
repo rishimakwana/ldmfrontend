@@ -21,6 +21,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { schema, TSchema } from "./Onboard.config";
 import ConfirmationPopup from "@/components/confirmationPopup/ConfirmationPopup.component";
+import { useClientOnboardMutation } from "@/redux/api/onboard.api";
 
 const OnboardClient = () => {
   const {
@@ -32,17 +33,17 @@ const OnboardClient = () => {
   } = useForm<TSchema>({
     resolver: yupResolver(schema),
   });
-
+  const [clientOnboard] = useClientOnboardMutation();
   const [openPopup, setOpenPopup] = useState<boolean>(false);
   const [formData, setFormData] = useState<any>(null);
   const [loading, setLoading] = useState(false); // State for loading button
 
   const router = useRouter();
 
-  const onSubmit = async (data: TSchema) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
-    setFormData(data); // Store the form data
     // router.push("/client/auth/otp-verify");
+    await clientOnboard(data).unwrap();
 
     setOpenPopup(true); // Open the confirmation popup
   };
@@ -84,7 +85,11 @@ const OnboardClient = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <InputField name="name" label="Client Name *" control={control} />
+            <InputField
+              name="fullName"
+              label="Client Name *"
+              control={control}
+            />
           </Grid>
 
           {/* Email and Phone in the same row */}

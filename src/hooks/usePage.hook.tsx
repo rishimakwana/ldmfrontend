@@ -5,10 +5,10 @@ export const usePage = () => {
 
   return {
     isDashboard:
-      router.pathname.startsWith("/lawyer/dashboard/") ||
+      router.pathname.startsWith("/lawyer/dashboard") ||
       router.pathname.startsWith("/customer/"),
     isCustomerDashboard: router.pathname.startsWith("/customer/"),
-    isAdminDashboard: router.pathname.startsWith("/lawyer/dashboard/"),
+    isAdminDashboard: router.pathname.startsWith("/lawyer/dashboard"),
     isPdfMakerPage: router.pathname.startsWith("/pdf-maker/"),
   };
 };
