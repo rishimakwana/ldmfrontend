@@ -15,7 +15,7 @@ interface PasswordResetFormProps {
   watch: any;
 
   isSubmitting: boolean;
-  title: string;
+  title?: string;
 }
 
 const PasswordResetForm = ({

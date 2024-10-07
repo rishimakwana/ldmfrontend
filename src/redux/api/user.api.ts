@@ -18,7 +18,7 @@ export const extendedApi = api.injectEndpoints({
           .catch(error => {
             if (error.meta.response?.status === 401) {
               removeCookie('token')
-              window.location.replace('/auth/login')
+              window.location.replace('/login')
             }
           })
       }

@@ -8,6 +8,7 @@ import { handleWebsiteLoader } from "@/redux/slice/layout.slice";
 import { RootLayoutProps } from "@/layouts/rootLayout/RootLayout.type";
 
 export const useAuth = ({ pageType }: RootLayoutProps) => {
+
   const router = useRouter();
   const token = getCookie("token");
   const dispatch = useReduxDispatch();
@@ -22,10 +23,8 @@ export const useAuth = ({ pageType }: RootLayoutProps) => {
   }, [loading]);
 
   useEffect(() => {
-    if (!token && pageType === "protected")
-      router.replace("/lawyer/auth/login");
-    else if (token && pageType === "public")
-      router.replace("/lawyer/dashboard/home");
+    if (!token && pageType === "protected") router.replace("/login");
+    else if (token && pageType === "public") router.replace("/lawyer/dashboard/home");
     else if (!token) setLoading(false);
     else if (profile && pageType === "protected") {
     }

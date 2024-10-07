@@ -11,8 +11,8 @@ import { HEADER_HEIGHT } from '@/layouts/rootLayout/RootLayout.config'
 
 export default function PageHeader(props: PageHeaderProps) {
   let { actions, heading, sx = {}, count, backUrl } = props
-  const { role } = useReduxSelector(state => state.layout.profile)
-  const isCustomer = role === 'customer'
+  const { roleId } = useReduxSelector(state => state.layout.profile)
+  const isCustomer = roleId == 3
 
 
   if (isCustomer) {

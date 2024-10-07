@@ -16,18 +16,12 @@ import { useReduxSelector } from "@/hooks/redux.hook";
 
 export default function NavItem(props: NavItemProps) {
   const { data, isChildren, onClick, size = "small", ...restProps } = props;
-  const { role, modules } = useReduxSelector((state) => state.layout.profile);
   const [open, setOpen] = useState(false);
 
   const router = useRouter();
   const style = makeStyle(size, isChildren);
   const link = data.link?.replace("/lawyer/dashboard/", "") || "";
-  const isActive =
-    link && router.pathname.replace("/lawyer/dashboard/", "").startsWith(link);
-
-  // if (data.id && !modules[Number(data.id)]?.permissions.view) return null
-  // else if (data.roles && !data.roles.includes(role)) return null
-  // else if (data.exludedRoles && data.exludedRoles.includes(role)) return null
+  const isActive = link && router.pathname.replace("/lawyer/dashboard/", "").startsWith(link);
 
   return (
     <>

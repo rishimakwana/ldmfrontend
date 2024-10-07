@@ -95,7 +95,7 @@ const OtpVerify = () => {
           </LoadingButton>
           <Typography textAlign="center">
             Didn’t receive the OTP? &nbsp;{" "}
-            <MuiLink href="/auth/login" sx={style.textLink}>
+            <MuiLink href="/login" sx={style.textLink}>
               resend
             </MuiLink>
           </Typography>

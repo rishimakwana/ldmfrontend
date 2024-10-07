@@ -12,18 +12,18 @@ import {
 } from "@mui/material";
 import router, { useRouter } from "next/router";
 import React, { useState } from "react";
-import { style } from "./OnboardClient.style";
-import { CARD_OPTIONS } from "./component/DataCard.hook";
-import DataCard from "./component/DataCard.compoenet";
+import { style } from "./component/dashboard/OnboardClient.style";
+import { CARD_OPTIONS } from "./component/datacard/DataCard.hook";
+import DataCard from "./component/datacard/DataCard.compoenet";
 import { LoadingButton } from "@mui/lab";
 import InputField from "@/components/_ui/inputField/InputField.component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { schema, TSchema } from "./Onboard.config";
+import { schema, TSchema } from "./component/dashboard/Onboard.config";
 import ConfirmationPopup from "@/components/confirmationPopup/ConfirmationPopup.component";
 import { useClientOnboardMutation } from "@/redux/api/onboard.api";
 
-const OnboardClient = () => {
+const OnboardClientold = () => {
   const {
     control,
     handleSubmit,
@@ -147,8 +147,8 @@ const OnboardClient = () => {
   );
 };
 
-OnboardClient.rootLayoutProps = {
+OnboardClientold.rootLayoutProps = {
   pageType: "protected",
   title: "On-Board Client",
 };
-export default OnboardClient;
+export default OnboardClientold;

@@ -484,7 +484,7 @@ const RegisterComponent = () => {
 
         <Typography textAlign="center" mt={2}>
           Already have an account? &nbsp;
-          <MuiLink component={Link} href="/auth/login">
+          <MuiLink component={Link} href="/login">
             Login
           </MuiLink>
         </Typography>

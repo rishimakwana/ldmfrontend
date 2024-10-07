@@ -1,12 +1,12 @@
 import { Page } from "@/types";
 
 const Home: Page = () => {
-  return "Home";
+  return "Home Page";
 };
 
 Home.rootLayoutProps = {
   title: "Home",
-  pageType: "public",
+  pageType: "protected",
 };
 
 export default Home;

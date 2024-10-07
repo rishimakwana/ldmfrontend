@@ -16,6 +16,7 @@ export default function RootLayout(
   props: RootLayoutProps & { children: React.ReactNode }
 ) {
   let { children, title, header, sidebar, footer } = props;
+
   const { isLoading, isError } = useAuth(props);
   const { isCustomerDashboard, isAdminDashboard } = usePage();
   const ngProgress = useNProgress();
@@ -42,7 +43,7 @@ export default function RootLayout(
           {sidebar !== false && <Sidebar />}
           <Stack flex={1} width={contentWidth}>
             {header !== false && <Header />}
-            <Stack component="main" flex={1} mb={isAdminDashboard ? 3 : 0}>
+            <Stack component="main" flex={1} >
               <ErrorBoundary error={isError}>{renderChildren()}</ErrorBoundary>
             </Stack>
             {footer !== false && <Footer />}

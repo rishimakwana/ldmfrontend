@@ -9,11 +9,10 @@ export const extendedApi = api.injectEndpoints({
         url: '/auth/login',
         method: 'POST',
         body,
-        headers: { hideToast: 'true' },
       }),
     }),
 
-    lawyerRegister: builder.mutation<AuthApiResponse, RegisterPayload1 | RegisterPayload2 >({
+    lawyerRegister: builder.mutation<AuthApiResponse, RegisterPayload1 | RegisterPayload2>({
       query: (body) => ({
         url: '/lawyer/auth/register',
         method: 'POST',

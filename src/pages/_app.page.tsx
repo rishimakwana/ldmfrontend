@@ -16,6 +16,7 @@ import "@/lib/yup";
 
 function App(props: AppProps) {
   const { Component, pageProps } = props;
+
   const theme = useMakeTheme();
   const rootLayoutProps = Component.rootLayoutProps;
   const getNestedLayout = Component.getNestedLayout ?? ((page) => page);

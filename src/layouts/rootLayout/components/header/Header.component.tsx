@@ -69,8 +69,9 @@ export default function Header() {
               sx={style.profileBox}
               onClick={(e) => setProfileAnchorEl(e.currentTarget)}
             >
+              <MdCorporateFare />-------------------*--------
               <Avatar sx={style.avatar}>
-                {profile.role === "admin" && <MdCorporateFare />}
+                {profile.roleId == 1 && <MdCorporateFare />}
               </Avatar>
               <Typography sx={style.profileName} noWrap>
                 {name}
@@ -84,7 +85,7 @@ export default function Header() {
             <>
               <Button
                 variant="outlined"
-                href="/lawyer/auth/login"
+                href="/login"
                 LinkComponent={Link}
                 sx={style.button}
               >

@@ -12,5 +12,5 @@ export type ProfileDTO = {
   drivingLicenseFront: string;
   drivingLicenseBack: string;
   status: string;
-  role: string;
+  roleId: number;
 }

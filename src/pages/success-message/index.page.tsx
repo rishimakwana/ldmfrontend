@@ -32,7 +32,7 @@ export default function SuccessMessage() {
           <LoadingButton
             variant="contained"
             size="medium"
-            onClick={() => push("/lawyer/auth/login")}
+            onClick={() => push("/login")}
           >
             Ok
           </LoadingButton>

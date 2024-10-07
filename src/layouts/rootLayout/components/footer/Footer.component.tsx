@@ -5,8 +5,6 @@ import Logo from '@/components/logo/Logo.component'
 import { style } from './Footer.style'
 import { TNavItem } from './Footer.type'
 import { NAVS, SOCIAL_MEDIA_LINKS } from './Footer.config'
-import { useReduxSelector } from '@/hooks'
-
 
 
 export default function Footer() {

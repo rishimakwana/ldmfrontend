@@ -16,7 +16,6 @@ import { style } from "./UplaodDocuments.style";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema, TSchema } from "./UploadDocuments.config";
-import FileUploadField from "@/components/_ui/fileUploadField/FileUploadField.component";
 import CustomFileUploadField from "@/components/_ui/customFIleUplaod/CustomFIleUplaod";
 
 const UplaodDocuments = () => {
