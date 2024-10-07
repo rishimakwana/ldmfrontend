@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
   Link as MuiLink,
@@ -38,12 +38,14 @@ const Address: Page = () => {
   } = useForm<TSchema>({
     resolver: yupResolver(schema),
   });
-  const { push } = useRouter();
+  const router = useRouter();
   const onSubmit = async (formData: any) => {
+    sessionStorage.setItem("addressFormCompleted", "true");
+
     // const profile = await login({ ...formData }).unwrap();
     // setUser(profile);
     console.log(formData);
-    push("/client/auth/add-password");
+    router.push("/client/auth/add-password");
   };
 
   return (
@@ -64,7 +66,7 @@ const Address: Page = () => {
         >
           <IconButton
             sx={style.icon}
-            onClick={() => push("/client/auth/otp-verify")}
+            onClick={() => router.push("/client/auth/onboard")}
           >
             <LuArrowLeftCircle />
           </IconButton>

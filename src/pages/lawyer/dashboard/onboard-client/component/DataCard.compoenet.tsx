@@ -20,11 +20,11 @@ const DataCard = () => {
 
   return (
     <>
-      <Container maxWidth="xl">
+      <Container>
         <Grid container spacing={2} sx={style.grid}>
           {CARD_OPTIONS.map((data, index) => (
             <Grid key={index} item xs={12} sm={6} lg={4}>
-              <Stack sx={style.stack} bgcolor={data.color} spacing={1}>
+              <Stack sx={style.box} bgcolor={data.color} spacing={1}>
                 {/* Render Icon */}
                 {data.Icon && (
                   <Stack alignItems="start">

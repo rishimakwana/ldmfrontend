@@ -17,8 +17,8 @@ import InputField from "@/components/_ui/inputField/InputField.component";
 import { style } from "./Login.style";
 import { Page } from "@/types";
 import { schema, TSchema } from "./Login.config";
-import { useLawyerLoginMutation } from "@/redux/api/auth.api";
 import { setUser } from "../Auth.util";
+import { useLawyerLoginMutation } from "@/redux/api/auth.api";
 
 const Login: Page = () => {
   const [login] = useLawyerLoginMutation();

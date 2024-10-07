@@ -28,16 +28,14 @@ export const useAuth = ({ pageType }: RootLayoutProps) => {
       router.replace("/lawyer/dashboard/home");
     else if (!token) setLoading(false);
     else if (profile && pageType === "protected") {
-
     }
   }, [router.pathname, profile]);
-
 
   useEffect(() => {
     (async () => {
       try {
         if (!token) return;
-        await getProfile().unwrap();
+        // await getProfile().unwrap();
       } catch (e) {
         setError(true);
       } finally {

@@ -8,10 +8,7 @@ import WebsiteLoader from "@/components/websiteLoader/WebsiteLoader.component";
 import ErrorBoundary from "@/components/errorBoundary/ErrorBoundary.component";
 import { RootLayoutProps } from "./RootLayout.type";
 import { SIDEBAR_WIDTH } from "./RootLayout.config";
-import {
-  usePage,
-  useNProgress,
-} from "@/hooks";
+import { usePage, useNProgress } from "@/hooks";
 import { getCookie } from "@/utils";
 import { useAuth } from "./RootLayout.hook";
 
@@ -24,7 +21,6 @@ export default function RootLayout(
   const ngProgress = useNProgress();
   const token = getCookie("token");
   const contentWidth = sidebar ? `calc(100vw - ${SIDEBAR_WIDTH}px)` : undefined;
-
 
   if (!isAdminDashboard) sidebar = false;
   if (isAdminDashboard) (footer = false), (header = false);

@@ -7,12 +7,14 @@ export const style: Style = {
     p: 4,
     gap: 3,
     borderRadius: 2.5,
-    ml : 2,
+    bgcolor: 'background.default',
     mx: 'auto',
     border: 1,
     borderColor: 'divider',
   },
-
+  stack :{ 
+     borderRadius: 3, p: 4 
+  },
   grid: {
    my : 2
   },
@@ -22,17 +24,9 @@ export const style: Style = {
   },
   button :{
     display:"flex",
-    justifyContent:"space-between",
-    gap:2
-  },
-  stack : {
-    borderRadius: 3,
-    p: 6,
-    height: "184px",
-    width : "314px",
-    alignItems: "center"
+    justifyContent:"end",
+    gap:2,
   }
-
 
 
 }

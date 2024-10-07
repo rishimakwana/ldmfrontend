@@ -1,20 +1,30 @@
 import PasswordResetForm from "@/components/forgetPassword/ForgetPassword.component"; // Ensure this path is correct
-import React from "react";
+import React, { useEffect } from "react";
 import { schema, TSchema } from "./AddPassword.config";
 import { Container, Stack, Typography } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { style } from "./AddPassword.style";
+import { useRouter } from "next/navigation";
 
-const ForgetPass = () => {
+const AddPassword = () => {
   const { control, handleSubmit, formState, watch } = useForm<TSchema>({
     resolver: yupResolver(schema),
   });
-
+  const router = useRouter();
   const onSubmit = async (formData: TSchema) => {
     // Handle the password reset logic here
+
     console.log(formData);
   };
+
+  useEffect(() => {
+    const addressFormCompleted = sessionStorage.getItem("addressFormCompleted");
+
+    if (!addressFormCompleted) {
+      router.push("/client/auth/address");
+    }
+  }, [router]);
 
   return (
     <>
@@ -49,4 +59,4 @@ const ForgetPass = () => {
   );
 };
 
-export default ForgetPass;
+export default AddPassword;
