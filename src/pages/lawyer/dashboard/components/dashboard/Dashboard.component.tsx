@@ -1,5 +1,5 @@
 import PageHeader from "@/components/pageHeader/PageHeader.component";
-import { Container, Typography, Grid, } from "@mui/material";
+import { Container, Typography, Grid } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
@@ -11,6 +11,7 @@ import { schema, TSchema } from "./Onboard.config";
 import { style } from "./OnboardClient.style";
 import DataCard from "@/components/datacard/DataCard.compoenet";
 import { LawyerCardOptions } from "@/data/DashboardStats";
+import { useClientOnboardMutation } from "@/redux/api/onboardClient.api";
 
 const OnboardClient = () => {
   const {
@@ -28,12 +29,15 @@ const OnboardClient = () => {
   const [loading, setLoading] = useState(false); // State for loading button
 
   const router = useRouter();
+  const [clientOnboard] = useClientOnboardMutation();
 
-  const onSubmit = async (data: TSchema) => {
-    setFormData(data); // Store the form data
+  const onSubmit = async (data: any) => {
+    console.log(data);
     // router.push("/client/auth/otp-verify");
+    setFormData(data);
+    await clientOnboard(data).unwrap();
 
-    setOpenPopup(true); // Open the confirmation popup
+    setOpenPopup(true);
   };
   const handleConfirm = async () => {
     setLoading(true);
@@ -49,7 +53,6 @@ const OnboardClient = () => {
   const handleClose = () => {
     setOpenPopup(false); // Close the popup
   };
-
 
   return (
     <>
@@ -74,7 +77,11 @@ const OnboardClient = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <InputField name="fullName" label="Client Name *" control={control} />
+            <InputField
+              name="fullName"
+              label="Client Name *"
+              control={control}
+            />
           </Grid>
 
           {/* Email and Phone in the same row */}

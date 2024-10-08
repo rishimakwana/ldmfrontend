@@ -7,25 +7,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import InputField from "@/components/_ui/inputField/InputField.component";
 import { Page } from "@/types";
-import { useLawyerLoginMutation } from "@/redux/api/auth.api";
 import { style } from "./Onboard.style";
 import { schema, TSchema } from "./Onboard.config";
 import { useRouter } from "next/navigation";
-import {
-  useGetProfileMutation,
-  useLazyProfileQuery,
-} from "@/redux/api/user.api";
+import { useGetProfileMutation } from "@/redux/api/user.api";
 import { useRouter as getParams } from "next/router";
 
 const Onboard: Page = () => {
-  const [login] = useLawyerLoginMutation();
   const name = "John Doe";
 
   const router = useRouter();
   const params = getParams();
-  const [email, setEmail] = useState(""); // State for email
-  const [phone, setPhone] = useState(""); // State for phone
-  const [getProfile] = useGetProfileMutation(); // Mutation hook to get profile
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [token, setToken] = useState("");
+  const [getProfile] = useGetProfileMutation();
 
   const {
     control,
@@ -38,7 +34,7 @@ const Onboard: Page = () => {
 
   const onSubmit = async (formData: TSchema) => {
     console.log(formData);
-    router.push("/client/auth/otp-verify");
+    router.push(`/client/auth/address?token=${token}`);
   };
 
   useEffect(() => {
@@ -49,10 +45,11 @@ const Onboard: Page = () => {
           const profileData: any = await getProfile({
             token: params.query.token.toString(),
           }).unwrap();
-          setEmail(profileData.result.email);
-          setPhone(profileData.result.phone);
-          setValue("email", profileData.result.email);
-          setValue("phone", profileData.result.phone);
+          setToken(params.query.token.toString());
+          setEmail(profileData.user.email);
+          setPhone(profileData.user.phone);
+          setValue("email", profileData.user.email);
+          setValue("phone", profileData.user.phone);
           console.log("Profile data:", profileData.result);
         } catch (error) {
           console.error("Error fetching profile:", error);

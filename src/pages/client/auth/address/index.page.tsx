@@ -28,6 +28,8 @@ import { style } from "./Address.style";
 import { TSchema, schema } from "./Address.config";
 import { LuArrowLeftCircle } from "react-icons/lu";
 import { useRouter } from "next/navigation";
+import { useRouter as useParams } from "next/router";
+import { useClientDetailsMutation } from "@/redux/api/onboardClient.api";
 
 const Address: Page = () => {
   const {
@@ -39,13 +41,19 @@ const Address: Page = () => {
     resolver: yupResolver(schema),
   });
   const router = useRouter();
-  const onSubmit = async (formData: any) => {
-    sessionStorage.setItem("addressFormCompleted", "true");
+  const params = useParams();
+  const [clientDetails] = useClientDetailsMutation();
 
-    // const profile = await login({ ...formData }).unwrap();
+  const onSubmit = async (formData: any) => {
+    const token = params.query.token;
+    const response: any = await clientDetails({
+      ...formData,
+      token,
+      step1: 1,
+    });
     // setUser(profile);
-    console.log(formData);
-    router.push("/client/auth/add-password");
+    console.log(response);
+    router.push(`/client/auth/add-password?token=${token}`);
   };
 
   return (
