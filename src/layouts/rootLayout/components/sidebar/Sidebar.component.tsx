@@ -4,13 +4,14 @@ import { List, Stack } from "@mui/material";
 import Logo from "@/components/logo/Logo.component";
 import NavItem from "@/components/navItem/NavItem.component";
 import { style } from "./Sidebar.style";
-import { useSidebarOptions } from "./Sidebar.hook";
 import { useReduxSelector } from "@/hooks/redux.hook";
+import { useSidebarOptions } from "./Sidebar.hook";
 
 export default function Sidebar() {
   const navRef = useRef<HTMLElement>();
   const profile = useReduxSelector((state) => state.layout.profile);
-  const sidebarOptions = useSidebarOptions(profile);
+  console.log(profile, "user ki profile");
+  const sidebarOptions = useSidebarOptions({ profile });
 
   useEffect(() => {
     const navElement = navRef.current!;

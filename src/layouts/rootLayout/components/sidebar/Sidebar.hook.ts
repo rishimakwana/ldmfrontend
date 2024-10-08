@@ -4,10 +4,13 @@ import { IoLogOutOutline } from 'react-icons/io5';
 import { MenuOption } from '@/types';
 
 export const useSidebarOptions = ({ profile }: any) => {
+  console.log("*****dgsdr*****", profile)
+
   const SIDEBAR_OPTIONS = useMemo<MenuOption[]>(() => {
+    console.log("**********", profile)
     const signOutOption: MenuOption = { id: 99, label: 'Sign Out', link: '/login', Icon: IoLogOutOutline };
 
-    if (profile?.roleId === 1) {
+    if (profile?.roleId !== 1) {
       return [
         { id: 1, label: 'Dashboard', link: '/lawyer/dashboard/', Icon: MdDashboardCustomize },
         { id: 2, label: 'My Documents', link: '/lawyer/dashboard/my-documents', Icon: MdOutlineCloudUpload },

@@ -29,7 +29,7 @@ const AddPassword = () => {
     console.log(formData);
     if (response) {
       alert("Success");
-      router.push("http://localhost:3000/lawyer/auth/login");
+      router.push("http://localhost:3000/login");
     }
   };
 

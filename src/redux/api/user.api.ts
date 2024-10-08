@@ -47,7 +47,18 @@ export const extendedApi = api.injectEndpoints({
         headers: {
           Authorization: `Bearer ${token}`,
         },
+
       }),
+      async onQueryStarted({ token }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+
+          console.log(data)
+
+        } catch (error) {
+          console.error('Failed to fetch profile:', error);
+        }
+      },
     }),
 
 
