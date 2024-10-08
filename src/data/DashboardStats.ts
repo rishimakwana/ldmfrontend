@@ -11,8 +11,8 @@ export const LawyerCardOptions: CardData[] = [
 ];
 
 export const ClientCardOptions: CardData[] = [
-  { id: 6, label: 'My Documents', numbers: "1234", link: '/lawyer/dashboard', color: 'primary.light', Icon: IoDocumentText },
-  { id: 1, label: 'Recently Shared', numbers: "234", link: '/lawyer/dashboard/organizations', color: 'secondary.light', Icon: IoMdDocument },
-  { id: 5, label: 'My Subscription', numbers: "134", link: '/lawyer/dashboard/subscriptions', color: 'warning.light', Icon: IoIosTime },
+  { id: 6, label: 'My Documents', numbers: "1234", link: '/client/dashboard', color: 'primary.light', Icon: IoDocumentText },
+  { id: 1, label: 'Recently Shared', numbers: "234", link: '/client/dashboard/organizations', color: 'secondary.light', Icon: IoMdDocument },
+  { id: 5, label: 'My Subscription', numbers: "134", link: '/client/dashboard/subscriptions', color: 'warning.light', Icon: IoIosTime },
 ];
 

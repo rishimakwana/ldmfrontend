@@ -24,10 +24,10 @@ export const useAuth = ({ pageType }: RootLayoutProps) => {
 
   useEffect(() => {
     if (!token && pageType === "protected") router.replace("/login");
-    else if (token && pageType === "public") router.replace("/lawyer/dashboard/home");
+    // else if (token && pageType === "public") router.replace("/lawyer/dashboard/");
     else if (!token) setLoading(false);
-    else if (profile && pageType === "protected") {
-    }
+    // else if (profile && pageType === "protected") {
+    // }
   }, [router.pathname, profile]);
 
   useEffect(() => {

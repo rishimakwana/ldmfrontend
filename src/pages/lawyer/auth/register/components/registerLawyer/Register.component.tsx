@@ -54,9 +54,7 @@ const RegisterComponent = () => {
   const [register] = useLawyerRegisterMutation();
   const [uploadFile] = useUploadFileMutation();
 
-  const {
-    control,
-    handleSubmit,
+  const { control, handleSubmit,
     getValues,
     watch,
     trigger,
@@ -101,7 +99,7 @@ const RegisterComponent = () => {
       };
 
       const profile = await register(formDataToSend1).unwrap();
-      setUser(profile);
+      router.push("/login");
     } catch (error) {
       console.log(error);
     }
@@ -174,12 +172,15 @@ const RegisterComponent = () => {
       ["firmName", "street", "city", "zipCode", "state", "termsAccepted"],
     ];
 
-    if (activeStep === 0) {
-      lawyerRegister();
-    }
+
 
     const isValid = await validateStepFields(stepFields[activeStep] || []);
-    if (isValid) setActiveStep((prev) => prev + 1);
+    if (isValid) {
+      if (activeStep === 0) {
+        await lawyerRegister();
+      }
+      setActiveStep((prev) => prev + 1);
+    }
   };
 
   const passwordValue = watch("password", "");
