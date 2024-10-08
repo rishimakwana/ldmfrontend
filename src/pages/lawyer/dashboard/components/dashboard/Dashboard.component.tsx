@@ -7,9 +7,10 @@ import InputField from "@/components/_ui/inputField/InputField.component";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import ConfirmationPopup from "@/components/confirmationPopup/ConfirmationPopup.component";
-import DataCard from "../datacard/DataCard.compoenet";
 import { schema, TSchema } from "./Onboard.config";
 import { style } from "./OnboardClient.style";
+import DataCard from "@/components/datacard/DataCard.compoenet";
+import { LawyerCardOptions } from "@/data/DashboardStats";
 
 const OnboardClient = () => {
   const {
@@ -29,7 +30,6 @@ const OnboardClient = () => {
   const router = useRouter();
 
   const onSubmit = async (data: TSchema) => {
-    console.log(data);
     setFormData(data); // Store the form data
     // router.push("/client/auth/otp-verify");
 
@@ -50,10 +50,11 @@ const OnboardClient = () => {
     setOpenPopup(false); // Close the popup
   };
 
+
   return (
     <>
-      <PageHeader heading="Onboard" />
-      <DataCard />
+      <PageHeader heading="" />
+      <DataCard cardOptions={LawyerCardOptions} />
       <Container className="section-spacing-my">
         <Grid
           component="form"
@@ -73,7 +74,7 @@ const OnboardClient = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <InputField name="name" label="Client Name *" control={control} />
+            <InputField name="fullName" label="Client Name *" control={control} />
           </Grid>
 
           {/* Email and Phone in the same row */}

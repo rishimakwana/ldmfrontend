@@ -1,9 +1,7 @@
 export type ProfileDTO = {
-  fullName: string;
-  countryCode: string;
-  phone: string;
-  email: string;
-  password: string;
+  id: number;
+  userId: number;
+  profilePicUrl: string | null;
   firmName: string;
   street: string;
   city: string;
@@ -11,6 +9,18 @@ export type ProfileDTO = {
   state: string;
   drivingLicenseFront: string;
   drivingLicenseBack: string;
-  status: string;
+  createdAt: string;
+  updatedAt: string;
+  fullName: string;
+  phone: string;
+  email: string;
+  status: 'Pending' | 'Approved' | 'Disapproved' | 'Not Applied';
+  gender: string | null;
   roleId: number;
+}
+
+export type ProfileResponseDto = {
+  statusCode: number;
+  message: string;
+  user: ProfileDTO;
 }

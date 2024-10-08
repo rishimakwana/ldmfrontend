@@ -1,21 +1,16 @@
 import { useEffect, useRef } from "react";
-import { Avatar, List, Stack, Typography, Button } from "@mui/material";
-import { MdCorporateFare } from "react-icons/md";
+import { List, Stack } from "@mui/material";
 
 import Logo from "@/components/logo/Logo.component";
 import NavItem from "@/components/navItem/NavItem.component";
 import { style } from "./Sidebar.style";
 import { useSidebarOptions } from "./Sidebar.hook";
-import { useReduxDispatch, useReduxSelector } from "@/hooks/redux.hook";
-import { formatToTitleCase } from "@/utils";
-import { handleLogout } from "@/redux/slice/layout.slice";
+import { useReduxSelector } from "@/hooks/redux.hook";
 
 export default function Sidebar() {
   const navRef = useRef<HTMLElement>();
   const profile = useReduxSelector((state) => state.layout.profile);
-  const dispatch = useReduxDispatch();
-  const sidebarOptions = useSidebarOptions();
-  const name = profile?.fullName;
+  const sidebarOptions = useSidebarOptions(profile);
 
   useEffect(() => {
     const navElement = navRef.current!;

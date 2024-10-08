@@ -2,7 +2,7 @@ import { ProfileDTO } from '@/dto'
 
 
 
-export type OboardApiResponse = Omit<ProfileDTO, 'modules'> & { token: string }
+export type OnboardApiResponse = Omit<ProfileDTO, 'modules'> & { token: string }
 
 export type OnBoardPayload = {
   ame: string;
@@ -10,5 +10,3 @@ export type OnBoardPayload = {
   email: string;
   password: string;
 }
-
-

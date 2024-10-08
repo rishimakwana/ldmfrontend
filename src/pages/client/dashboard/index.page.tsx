@@ -1,16 +1,15 @@
-import { Typography } from "@mui/material";
-import React from "react";
+import { Page } from '@/types';
+import ClientDashboard from './components/clientDashboard/ClientDashboard.component';
 
-const Dashboard = () => {
+const Dashboard: Page = () => {
   return (
-    <>
-      <Typography variant="h1">Client Dashboard</Typography>
-    </>
+    <><ClientDashboard /></>
   );
 };
 
 Dashboard.rootLayoutProps = {
   pageType: "protected",
-  title: "Dashboard",
+  title: 'Dashboard',
+  sidebar: true,
 };
 export default Dashboard;

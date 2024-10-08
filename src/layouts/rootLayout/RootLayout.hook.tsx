@@ -34,7 +34,7 @@ export const useAuth = ({ pageType }: RootLayoutProps) => {
     (async () => {
       try {
         if (!token) return;
-        // await getProfile().unwrap();
+        await getProfile().unwrap();
       } catch (e) {
         setError(true);
       } finally {

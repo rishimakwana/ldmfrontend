@@ -1,20 +1,22 @@
 import { removeCookie } from '@/utils'
 import { updateProfile } from '../slice/layout.slice'
 import { api } from './api.config'
-import { ProfileDTO } from '@/dto'
-import { Module } from '@/types'
-
-
+import { ProfileDTO, ProfileResponseDto } from '@/dto'
 
 export const extendedApi = api.injectEndpoints({
   endpoints: (builder) => ({
 
-    profile: builder.query<ProfileDTO & { modules: Record<string, Module> }, void>({
+    profile: builder.query<ProfileResponseDto, void>({
       query: () => '/auth/getProfile',
       providesTags: ['profile'],
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         await queryFulfilled
-          .then(({ data }) => dispatch(updateProfile(data)))
+          .then(({ data }) => {
+            if (data && data?.user) {
+              dispatch(updateProfile(data?.user))
+            }
+          }
+          )
           .catch(error => {
             if (error.meta.response?.status === 401) {
               removeCookie('token')
@@ -36,8 +38,8 @@ export const extendedApi = api.injectEndpoints({
         body,
       }),
     }),
-     
-    
+
+
     getProfile: builder.mutation<ProfileDTO, { token: string }>({
       query: ({ token }) => ({
         url: '/auth/getProfile',
@@ -47,8 +49,8 @@ export const extendedApi = api.injectEndpoints({
         },
       }),
     }),
-    
-    
+
+
 
   })
 })

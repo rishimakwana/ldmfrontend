@@ -12,16 +12,26 @@ import Link from "next/link";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { NavItemProps } from "./NavItem.type";
 import { makeStyle } from "./NavItem.style";
-import { useReduxSelector } from "@/hooks/redux.hook";
+import { useReduxDispatch } from "@/hooks/redux.hook";
+import { handleLogout } from "@/redux/slice/layout.slice";
 
 export default function NavItem(props: NavItemProps) {
   const { data, isChildren, onClick, size = "small", ...restProps } = props;
   const [open, setOpen] = useState(false);
+  const dispatch = useReduxDispatch();
 
   const router = useRouter();
   const style = makeStyle(size, isChildren);
   const link = data.link?.replace("/lawyer/dashboard/", "") || "";
   const isActive = link && router.pathname.replace("/lawyer/dashboard/", "").startsWith(link);
+
+  const handleItemClick = (el: React.MouseEvent<HTMLLIElement>) => {
+    setOpen(!open);
+    if (data.label === "Sign Out") {
+      dispatch(handleLogout());
+    }
+    onClick && onClick(el);
+  };
 
   return (
     <>
@@ -33,9 +43,7 @@ export default function NavItem(props: NavItemProps) {
         href={data.link || "#"}
         className={isActive ? "active" : ""}
         scroll={!(data.link === "#" || data.link === undefined)}
-        onClick={(el) => {
-          setOpen(!open), onClick && onClick(el);
-        }}
+        onClick={handleItemClick}
       >
         {data.Icon && (
           <ListItemIcon sx={style.itemIcon}>

@@ -1,15 +1,17 @@
 import { Container, Stack, Typography, Grid, } from "@mui/material";
 import React from "react";
-import { CARD_OPTIONS } from "./DataCard.hook";
 import { style } from "./DataCard.style";
+import { DataCardProps } from "./DataCard.type";
 
-const DataCard = () => {
+
+
+const DataCard = ({ cardOptions }: DataCardProps) => {
 
   return (
     <>
       <Container>
         <Grid container spacing={2} sx={style.grid}>
-          {CARD_OPTIONS.map((data, index) => (
+          {cardOptions.map((data, index) => (
             <Grid key={index} item xs={12} sm={6} lg={4}>
               <Stack sx={style.box} bgcolor={data.color} spacing={1}>
                 {/* Render Icon */}

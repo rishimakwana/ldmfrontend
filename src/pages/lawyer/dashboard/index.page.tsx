@@ -1,5 +1,5 @@
 import { Page } from '@/types';
-import OnboardClient from './onboard-client/component/dashboard/Dashboard.component';
+import OnboardClient from './components/dashboard/Dashboard.component';
 
 const Dashboard: Page = () => {
   return (

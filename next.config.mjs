@@ -15,9 +15,9 @@ const nextConfig = {
     ]
   },
   transpilePackages: ['@mui/x-charts', 'mui-one-time-password-input'],
-  async redirects() {
-    return [{ source: '/client/dashboard', destination: '/', permanent: false }]
-  },
+  // async redirects() {
+  //   return [{ source: '/client/dashboard', destination: '/', permanent: false }]
+  // },
 }
 
 export default nextConfig

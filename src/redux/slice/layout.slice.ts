@@ -1,15 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ProfileDTO } from '@/dto'
 import { removeCookie } from '@/utils'
-import { Module } from '@/types'
-
 
 
 export const layoutSlice = createSlice({
   name: 'layout',
   initialState: {
     isWebsiteLoading: true,
-    profile: {} as Profile,
+    profile: {} as ProfileDTO,
     isLoggedIn: false
   },
   reducers: {
@@ -17,21 +15,17 @@ export const layoutSlice = createSlice({
       state.isWebsiteLoading = action.payload
     },
 
-    updateProfile: (state, action: PayloadAction<Profile>) => {
+    updateProfile: (state, action: PayloadAction<ProfileDTO>) => {
       state.profile = action.payload
       state.isLoggedIn = true
     },
 
     handleLogout: () => {
       removeCookie('token')
-      window.location.replace('/')
+      window.location.replace('/login')
     }
   }
 })
-
-
-type Profile = ProfileDTO & { modules: Record<string, Module> }
-
 
 export const {
   handleWebsiteLoader,
